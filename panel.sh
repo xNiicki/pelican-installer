@@ -1,26 +1,28 @@
 #!/bin/sh
-su
+
+apt install sudo -y
+sudo su
 
 apt update
-apt install software-properties-common lsb-release apt-transport-https ca-certificates net-tools sudo -y
+apt install software-properties-common lsb-release apt-transport-https ca-certificates net-tools -y
 wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
 sh -c 'echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list'
 apt update
 
-apt install php8.3 -y
+apt install php8.3
 apt install php8.3-gd php8.3-mysql php8.3-mbstring php8.3-bcmath php8.3-xml php8.3-curl php8.3-zip php8.3-intl php8.3-sqlite3 php8.3-fpm -y
 
 
 mkdir -p /var/www/pelican
 cd /var/www/pelican
 
-curl -L https://github.com/pelican-dev/panel/releases/latest/download/panel.tar.gz |  tar -xzv
+curl -L https://github.com/pelican-dev/panel/releases/latest/download/panel.tar.gz | sudo tar -xzv
 
 touch /var/www/pelican/database/database.sqlite
 
 chown -R www-data:www-data /var/www/pelican
 
-curl -sS https://getcomposer.org/installer |  php -- --install-dir=/usr/local/bin --filename=composer
+curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer
 composer install --no-dev --optimize-autoloader
 
 systemctl stop apache2
@@ -78,9 +80,9 @@ server {
 }'  | sed "s/\$ip_address/$(hostname -I | awk '{print $1}')/" > /etc/nginx/sites-available/pelican.conf
 
 
- ln -s /etc/nginx/sites-available/pelican.conf /etc/nginx/sites-enabled/pelican.conf
+sudo ln -s /etc/nginx/sites-available/pelican.conf /etc/nginx/sites-enabled/pelican.conf
 
- systemctl restart nginx
+sudo systemctl restart nginx
 
 
 php artisan migrate
@@ -96,9 +98,9 @@ chown -R www-data:www-data /var/www/pelican
 cronjob="* * * * * php /var/www/pelican/artisan schedule:run >> /dev/null 2>&1"
 
 # Add the new cron job to the existing crontab for www-data
-( crontab -u www-data -l 2>/dev/null; echo "$cronjob") |  crontab -u www-data -
+(sudo crontab -u www-data -l 2>/dev/null; echo "$cronjob") | sudo crontab -u www-data -
 
- php artisan p:environment:queue-service
+sudo php artisan p:environment:queue-service
 
 
 echo "Pelican Panel has been installed successfully!"
