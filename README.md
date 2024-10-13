@@ -33,7 +33,7 @@
    ```
 
 3. Run the script: <br> <br>
-      If you are already the super user use:
+      If you are already the superuser use:
 
    ```bash
    ./panel.sh
