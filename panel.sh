@@ -20,7 +20,9 @@ touch /var/www/pelican/database/database.sqlite
 chown -R www-data:www-data /var/www/pelican
 
 curl -sS https://getcomposer.org/installer |  php -- --install-dir=/usr/local/bin --filename=composer
-composer install --no-dev --optimize-autoloader
+composer install --no-dev --optimize-autoloader << EOF
+yes
+EOF
 
 systemctl stop apache2
 
