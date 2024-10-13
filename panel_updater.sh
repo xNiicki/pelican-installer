@@ -20,4 +20,4 @@ php artisan queue:restart
 
 php artisan up
 
-echo "Panel updated successfully"
+echo "Panel updated successfully :)"
