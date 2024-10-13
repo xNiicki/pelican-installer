@@ -23,7 +23,7 @@
 1. Download the installer:
 
    ```bash
-   wget https://raw.githubusercontent.com/xNiicki/pelican-installer/main/install.sh
+   wget https://raw.githubusercontent.com/xNiicki/pelican-installer/refs/heads/main/panel.sh
    ```
 
 2. Make it executable:
