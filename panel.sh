@@ -15,13 +15,13 @@ apt install php8.3-gd php8.3-mysql php8.3-mbstring php8.3-bcmath php8.3-xml php8
 mkdir -p /var/www/pelican
 cd /var/www/pelican
 
-curl -L https://github.com/pelican-dev/panel/releases/latest/download/panel.tar.gz | sudo tar -xzv
+curl -L https://github.com/pelican-dev/panel/releases/latest/download/panel.tar.gz |  tar -xzv
 
 touch /var/www/pelican/database/database.sqlite
 
 chown -R www-data:www-data /var/www/pelican
 
-curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer
+curl -sS https://getcomposer.org/installer |  php -- --install-dir=/usr/local/bin --filename=composer
 composer install --no-dev --optimize-autoloader
 
 systemctl stop apache2
@@ -79,9 +79,9 @@ server {
 }'  | sed "s/\$ip_address/$(hostname -I | awk '{print $1}')/" > /etc/nginx/sites-available/pelican.conf
 
 
-sudo ln -s /etc/nginx/sites-available/pelican.conf /etc/nginx/sites-enabled/pelican.conf
+ ln -s /etc/nginx/sites-available/pelican.conf /etc/nginx/sites-enabled/pelican.conf
 
-sudo systemctl restart nginx
+ systemctl restart nginx
 
 
 php artisan migrate
@@ -97,9 +97,9 @@ chown -R www-data:www-data /var/www/pelican
 cronjob="* * * * * php /var/www/pelican/artisan schedule:run >> /dev/null 2>&1"
 
 # Add the new cron job to the existing crontab for www-data
-(sudo crontab -u www-data -l 2>/dev/null; echo "$cronjob") | sudo crontab -u www-data -
+( crontab -u www-data -l 2>/dev/null; echo "$cronjob") |  crontab -u www-data -
 
-sudo php artisan p:environment:queue-service
+ php artisan p:environment:queue-service
 
 
 echo "Pelican Panel has been installed successfully!"
