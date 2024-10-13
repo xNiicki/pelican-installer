@@ -29,13 +29,13 @@
 2. Make it executable:
 
    ```bash
-   chmod +x install.sh
+   chmod +x panel.sh
    ```
 
 3. Run the script:
 
    ```bash
-   sudo ./install.sh
+   sudo ./panel.sh
    ```
 
 4. 🧭 Follow the on-screen prompts to complete installation.
