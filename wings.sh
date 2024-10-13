@@ -40,3 +40,4 @@ RestartSec=5s
 WantedBy=multi-user.target" > /etc/systemd/system/wings.service
 
 systemctl enable --now wings
+systemctl start wings
