@@ -56,7 +56,7 @@
 
 ## 🎉 Post-installation
 
-Access your new Pelican Panel at http://YOUR_SERVER_IP/installer. Follow the on-screen instructions to finalize setup.
+Access your new Pelican Panel at ```http://<your-server-ip>/installer```. Follow the on-screen instructions to finalize setup.
 
 
 ## 🐛 Troubleshooting
