@@ -86,7 +86,9 @@ php artisan migrate
 php artisan config:clear
 php artisan cache:clear
 echo "ip = $ip_address"
-php artisan p:environment:setup
+php artisan p:environment:setup << EOF
+$ip_address
+EOF
 
 chmod -R 755 storage/* bootstrap/cache/
 chown -R www-data:www-data /var/www/pelican
