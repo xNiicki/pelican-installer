@@ -32,13 +32,19 @@
    chmod +x panel.sh
    ```
 
-3. Run the script:
+3. Run the script: <br> <br>
+      If you are already the super user use:
 
    ```bash
+   ./panel.sh
+   ```
+      If not use
+
+      ```bash
    sudo ./panel.sh
    ```
 
-4. 🧭 Follow the on-screen prompts to complete installation.
+5. 🧭 Follow the on-screen prompts to complete installation.
 
 ## 🔍 What the Script Does
 
