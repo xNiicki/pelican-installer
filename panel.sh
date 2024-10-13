@@ -91,10 +91,8 @@ php artisan p:environment:setup
 chmod -R 755 storage/* bootstrap/cache/
 chown -R www-data:www-data /var/www/pelican
 
-# The cron job to add
 cronjob="* * * * * php /var/www/pelican/artisan schedule:run >> /dev/null 2>&1"
 
-# Add the new cron job to the existing crontab for www-data
 (sudo crontab -u www-data -l 2>/dev/null; echo "$cronjob") | sudo crontab -u www-data -
 
 sudo php artisan p:environment:queue-service
