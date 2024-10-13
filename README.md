@@ -102,8 +102,3 @@ This project is open-source under the MIT License.
 
 This community-maintained installer is not officially associated with Pelican Panel. Use at your own discretion.
 
-## 🌟 Star Us!
-
-If you find this installer helpful, please consider giving us a star on GitHub! It helps others discover the project.
-
-[![GitHub stars](https://img.shields.io/github/stars/xNiicki/pelican-installer.svg?style=social&label=Star)](https://github.com/xNiicki/pelican-installer)
