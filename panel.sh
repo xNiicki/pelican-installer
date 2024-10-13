@@ -1,15 +1,12 @@
 #!/bin/sh
 
-apt install sudo -y
-sudo su
-
 apt update
 apt install software-properties-common lsb-release apt-transport-https ca-certificates net-tools -y
 wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
 sh -c 'echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list'
 apt update
 
-apt install php8.3
+apt install php8.3 -y
 apt install php8.3-gd php8.3-mysql php8.3-mbstring php8.3-bcmath php8.3-xml php8.3-curl php8.3-zip php8.3-intl php8.3-sqlite3 php8.3-fpm -y
 
 
