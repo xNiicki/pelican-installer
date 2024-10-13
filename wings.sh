@@ -12,10 +12,10 @@ curl -L -o /usr/local/bin/wings "https://github.com/pelican-dev/wings/releases/l
 chmod u+x /usr/local/bin/wings
 
 echo "Create your config.yml here is the documentation: https://pelican.dev/docs/wings/install#configure"
-echo "Paste your config.yml content and press [ENTER]:"
-read user_input
+echo "Paste your entire configuration below. Press Ctrl+D when finished:"
+cat > /etc/pelican/config.yml
 
-echo "$user_input" > /etc/pelican/config.yml
+echo "Configuration has been written to /etc/pelican/config.yml"
 
 
 echo "
