@@ -1,5 +1,5 @@
 #!/bin/sh
-
+su
 
 apt update
 apt install software-properties-common lsb-release apt-transport-https ca-certificates net-tools sudo -y
