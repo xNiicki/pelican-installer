@@ -84,9 +84,7 @@ server {
  systemctl restart nginx
 
 
-php artisan migrate << EOF
-yes
-EOF
+php artisan migrate --force
 php artisan config:clear
 php artisan cache:clear
 echo "ip = $ip_address"
