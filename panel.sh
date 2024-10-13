@@ -1,7 +1,9 @@
 #!/bin/sh
 
+
 apt update
-apt install software-properties-common lsb-release apt-transport-https ca-certificates net-tools -y
+apt install software-properties-common lsb-release apt-transport-https ca-certificates net-tools sudo -y
+sudo -su
 wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
 sh -c 'echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list'
 apt update
@@ -91,8 +93,10 @@ php artisan p:environment:setup
 chmod -R 755 storage/* bootstrap/cache/
 chown -R www-data:www-data /var/www/pelican
 
+# The cron job to add
 cronjob="* * * * * php /var/www/pelican/artisan schedule:run >> /dev/null 2>&1"
 
+# Add the new cron job to the existing crontab for www-data
 (sudo crontab -u www-data -l 2>/dev/null; echo "$cronjob") | sudo crontab -u www-data -
 
 sudo php artisan p:environment:queue-service
@@ -100,3 +104,4 @@ sudo php artisan p:environment:queue-service
 
 echo "Pelican Panel has been installed successfully!"
 echo "You can access your panel at http://$ip_address/installer"
+
