@@ -101,7 +101,11 @@ cronjob="* * * * * php /var/www/pelican/artisan schedule:run >> /dev/null 2>&1"
 # Add the new cron job to the existing crontab for www-data
 ( crontab -u www-data -l 2>/dev/null; echo "$cronjob") |  crontab -u www-data -
 
- php artisan p:environment:queue-service
+ php artisan p:environment:queue-service << EOF
+yes
+yes
+yes
+EOF
 
 
 echo "Pelican Panel has been installed successfully!"
