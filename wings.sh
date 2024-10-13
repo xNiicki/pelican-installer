@@ -16,3 +16,27 @@ echo "Paste your config.yml content and press [ENTER]:"
 read user_input
 
 echo "$user_input" > /etc/pelican/config.yml
+
+
+echo "
+[Unit]
+Description=Wings Daemon
+After=docker.service
+Requires=docker.service
+PartOf=docker.service
+
+[Service]
+User=root
+WorkingDirectory=/etc/pelican
+LimitNOFILE=4096
+PIDFile=/var/run/wings/daemon.pid
+ExecStart=/usr/local/bin/wings
+Restart=on-failure
+StartLimitInterval=180
+StartLimitBurst=30
+RestartSec=5s
+
+[Install]
+WantedBy=multi-user.target" > /etc/systemd/system/wings.service
+
+systemctl enable --now wings
