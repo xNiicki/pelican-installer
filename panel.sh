@@ -1,7 +1,7 @@
 #!/bin/sh
 
 apt update
-apt install software-properties-common lsb-release apt-transport-https ca-certificates net-tools -y
+apt install software-properties-common lsb-release apt-transport-https ca-certificates net-tools curl -y
 wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
 sh -c 'echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list'
 apt update
@@ -102,4 +102,3 @@ sudo php artisan p:environment:queue-service
 
 echo "Pelican Panel has been installed successfully!"
 echo "You can access your panel at http://$ip_address/installer"
-
