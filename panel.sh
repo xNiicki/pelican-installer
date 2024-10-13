@@ -81,10 +81,6 @@ sudo ln -s /etc/nginx/sites-available/pelican.conf /etc/nginx/sites-enabled/peli
 
 sudo systemctl restart nginx
 
-sudo chown -R www-data:www-data /var/www/pelican
-sudo find /var/www/pelican -type f -exec chmod 644 {} \;
-sudo find /var/www/pelican -type d -exec chmod 755 {} \;
-
 
 php artisan migrate
 php artisan config:clear
@@ -92,9 +88,17 @@ php artisan cache:clear
 echo "ip = $ip_address"
 php artisan p:environment:setup
 
-sudo chown -R www-data:www-data /var/www/pelican
+chmod -R 755 storage/* bootstrap/cache/
+chown -R www-data:www-data /var/www/pelican
+
+# The cron job to add
+cronjob="* * * * * php /var/www/pelican/artisan schedule:run >> /dev/null 2>&1"
+
+# Add the new cron job to the existing crontab for www-data
+(sudo crontab -u www-data -l 2>/dev/null; echo "$cronjob") | sudo crontab -u www-data -
+
+sudo php artisan p:environment:queue-service
 
 
 echo "Pelican Panel has been installed successfully!"
 echo "You can access your panel at http://$ip_address/installer"
-
